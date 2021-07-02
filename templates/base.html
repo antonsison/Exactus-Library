@@ -1,0 +1,26 @@
+
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Exactus Library</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  {# NOTE: Change this to CDN #}
+  <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.1.0/css/line-awesome.min.css">
+</head>
+<body>
+  <app-root></app-root>
+
+  <script type="text/javascript" src="{% static 'Library-fe/dist/Library-fe/runtime.js' %}"></script>
+  <script type="text/javascript" src="{% static 'Library-fe/dist/Library-fe/polyfills.js' %}"></script>
+  <script type="text/javascript" src="{% static 'Library-fe/dist/Library-fe/styles.js' %}"></script>
+  <script type="text/javascript" src="{% static 'Library-fe/dist/Library-fe/vendor.js' %}"></script>
+  <script type="text/javascript" src="{% static 'Library-fe/dist/Library-fe/main.js' %}"></script>
+</body>
+</html>
