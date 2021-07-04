@@ -26,26 +26,15 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name = ('user')
         verbose_name_plural = ('users')
 
+    def __str__(self):
+        return self.email
+
     def get_full_name(self):
-        '''
-        Returns the first_name plus the last_name, with a space in between.
-        '''
-        full_name = '%s %s' % (self.firstname, self.lastname)
-        return full_name.strip()
+        """Returns the first_name plus the last_name, 
+        with a space in between.
+        """
+        return '{} {}'.format(self.firstname, self.lastname)
 
     def get_short_name(self):
         # The user is identified by their email address
         return self.firstname
-
-    def __str__(self):
-        return self.email
-
-    def has_perm(self, perm, obj=None):
-        "Does the user have a specific permission?"
-        # Simplest possible answer: Yes, always
-        return True
-
-    def has_module_perms(self, app_label):
-        "Does the user have permissions to view the app `app_label`?"
-        # Simplest possible answer: Yes, always
-        return True
