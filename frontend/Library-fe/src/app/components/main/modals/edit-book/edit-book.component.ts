@@ -4,6 +4,7 @@ import { BookForm } from 'src/app/commons/forms/book.forms';
 import { Author } from 'src/app/commons/models/author.model';
 import { Book } from 'src/app/commons/models/book.model';
 import { BookService } from 'src/app/commons/services/books/book.service';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 export interface BookModel {
   book: any
@@ -18,6 +19,8 @@ export class EditBookComponent extends SimpleModalComponent<BookModel, any> impl
 
   form: BookForm;
   book: any;
+  dropdownSettings: IDropdownSettings = {};
+  selectedItems = [];
   all_author: Author[] = [];
   author_list: Author[] = [];
 
@@ -30,6 +33,7 @@ export class EditBookComponent extends SimpleModalComponent<BookModel, any> impl
   ngOnInit() {
     this.form = new BookForm(new Book);
     this.form.form.patchValue(this.book);
+    this.selectedItems = this.book.author
 
     this.bookService.allAuthors().subscribe(
       (data: Author[]) => {
@@ -39,6 +43,16 @@ export class EditBookComponent extends SimpleModalComponent<BookModel, any> impl
         console.log(error)
       }
     )
+
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'id',
+      textField: 'full_name',
+      selectAllText: 'Select All',
+      unSelectAllText: 'Unselect All',
+      itemsShowLimit: 5,
+      allowSearchFilter: true
+    };
   }
 
   onChangeCategory(){
@@ -51,10 +65,11 @@ export class EditBookComponent extends SimpleModalComponent<BookModel, any> impl
   }
 
   onSubmit({ value, valid }: { value: Book, valid: boolean }) {
-    if (valid) {
-      if (this.form.form.dirty) {
-        this.result = value;
-      }
+    this.form.form.patchValue({
+      'author': this.selectedItems
+    })
+    if (valid && this.selectedItems.length != 0) {
+      this.result = this.form.form.value;
       this.close();
     }
   }

@@ -44,7 +44,7 @@
                 <th class="vertical-align-middle" scope="row">{{ book.title }}</th>
                 <td class="vertical-align-middle">
                     <p *ngFor="let author of book.author" class="mb-1">
-                        {{ author.last_name }} {{ author.first_name }},
+                        {{ author.full_name }},
                     </p>
                 </td>
                 <td class="vertical-align-middle">

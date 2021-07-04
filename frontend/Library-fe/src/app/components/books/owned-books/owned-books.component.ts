@@ -51,6 +51,7 @@ export class OwnedBooksComponent implements OnInit {
               book.title=modal_data.title
               book.location=modal_data.location
               book.category=modal_data.category
+              book.author=modal_data.author
             }, error => {
               console.log(error)
             }

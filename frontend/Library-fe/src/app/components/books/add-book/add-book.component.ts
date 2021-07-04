@@ -39,7 +39,7 @@ export class AddBookComponent implements OnInit {
     this.dropdownSettings = {
       singleSelection: false,
       idField: 'id',
-      textField: 'first_name',
+      textField: 'full_name',
       selectAllText: 'Select All',
       unSelectAllText: 'Unselect All',
       itemsShowLimit: 5,
