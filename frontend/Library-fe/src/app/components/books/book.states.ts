@@ -4,30 +4,37 @@ import { BorrowedBooksComponent } from "./borrowed-books/borrowed-books.componen
 import { OwnedBooksComponent } from "./owned-books/owned-books.component";
 import { AuthorListComponent } from "./author-list/author-list.component";
 import { AddBookComponent } from "./add-book/add-book.component";
+import { AddAuthorComponent } from "./add-author/add-author.component";
 
 export const BOOK_STATES: Object[] = [
     {
         name : 'borrowed-books',
         url  : '/borrowed-books/',
         views:  NavContent(BorrowedBooksComponent),
-        //onEnter: LoginRequired
+        onEnter: LoginRequired
     },
     {
         name : 'owned-books',
         url  : '/owned-books/',
         views:  NavContent(OwnedBooksComponent),
-        //onEnter: LoginRequired
+        onEnter: LoginRequired
     },
     {
         name : 'author-list',
         url  : '/author-list/',
         views:  NavContent(AuthorListComponent),
-        //onEnter: LoginRequired
+        onEnter: LoginRequired
     },
     {
         name : 'add-book',
         url  : '/add-book/',
         views:  NavContent(AddBookComponent),
-        //onEnter: LoginRequired
+        onEnter: LoginRequired
+    },
+    {
+        name : 'add-author',
+        url  : '/add-author/',
+        views:  NavContent(AddAuthorComponent),
+        onEnter: LoginRequired
     }
 ]

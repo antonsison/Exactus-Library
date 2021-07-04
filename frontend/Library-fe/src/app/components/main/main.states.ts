@@ -8,6 +8,6 @@ export const MAIN_STATES: Object[] = [
         name : 'dashboard',
         url  : '/dashboard/',
         views:  NavContent(DashboardComponent),
-        //onEnter: LoginRequired
+        onEnter: LoginRequired
     },
 ]

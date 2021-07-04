@@ -26,6 +26,6 @@ export const USER_STATES: Object[] = [
         name : 'settings',
         url  : '/settings/',
         views:  NavContent(SettingsComponent),
-        //onEnter: LoginRequired
+        onEnter: LoginRequired
     },
 ];

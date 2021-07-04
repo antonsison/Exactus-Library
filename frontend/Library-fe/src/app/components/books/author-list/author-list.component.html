@@ -1,24 +1,20 @@
 <div class='mt-4'>
     <div class="row">
-        <div class="col-md-12">
-            <h2>Author List</h2>
+        <div class="col-md-6">
+            <h2>Author Lists</h2>
+        </div>
+        <div class="col-md-6 text-right">
+            <button class="btn btn-secondary mr-2" (click)="addAuthor($event)">
+                Add Author
+            </button>
         </div>
     </div>
 
-    <form class="form-group" [formGroup]="form.form">
+    <form class="form-group" [formGroup]="form.form" (ngSubmit)="onSubmit(form.form)">
         <div class="input-group mb-3">
-            <input type="text" formControlName="search_text" class="form-control" placeholder="Search Title" aria-label="Search" aria-describedby="basic-addon2">
+            <input type="text" formControlName="search_text" class="form-control" placeholder="Search Last Name" aria-label="Search" aria-describedby="basic-addon2">
             <div class="input-group-append">
                 <button class="btn btn-outline-secondary" type="submit"><i class="la la-search"></i></button>
-            </div>
-            <div class="input-group-append" ngbDropdown>
-                <button class="btn btn-primary" id="dropdownBasic1" ngbDropdownToggle><i class="la la-filter"></i> Filter</button>
-                <div ngbDropdownMenu aria-labelledby="dropdownBasic1" >
-                    <a class="dropdown-item" href="." ngbDropdownItem >All</a>
-                    <a class="dropdown-item" href="#" ngbDropdownItem >Available</a>
-                    <a class="dropdown-item" href="#" ngbDropdownItem >Checked Out</a>
-                    <a class="dropdown-item" href="#" ngbDropdownItem >Digital Copy</a>
-                </div>
             </div>
         </div>
     </form>
@@ -26,30 +22,19 @@
     <table class="table mt-2">
         <thead class="thead-dark">
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">Email</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
+            <tr *ngFor="let author of author_list">
+                <th scope="row">
+                    <span *ngIf="author.email"> {{ author.email }} </span>
+                    <span *ngIf="!author.email"> None </span>
+                </th>
+                <td>{{ author.first_name }}</td>
+                <td>{{ author.last_name }}</td>
             </tr>
         </tbody>
     </table>

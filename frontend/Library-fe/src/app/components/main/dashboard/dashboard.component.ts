@@ -26,8 +26,6 @@ export class DashboardComponent implements OnInit {
       (data: Book[]) => {
         this.book_list = data;
         this.all_book = data;
-
-        console.log(data)
       }, error => {
         console.log(error)
       }

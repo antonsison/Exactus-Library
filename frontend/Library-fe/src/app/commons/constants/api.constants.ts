@@ -13,3 +13,4 @@ export const AUTH_USER_ID = urlsafe(USERS, 'auth-user');
  */
 export const BOOKS = '/api/book/';
 export const OWNED_BOOK = urlsafe(BOOKS, 'owned-books');
+export const BOOKS_AUTHORS = urlsafe(BOOKS, 'authors');
