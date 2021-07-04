@@ -58,7 +58,8 @@ export class AddBookComponent implements OnInit {
 
   onSubmit({ value, valid }: { value: Book, valid: boolean }) {
     this.form.form.patchValue({
-      'author': this.selectedItems
+      'author': this.selectedItems,
+      'status': 'available'
     })
     if (valid && this.selectedItems.length != 0) {
       this.bookService.addBook(this.form.form.value).subscribe(
