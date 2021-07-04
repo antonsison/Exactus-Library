@@ -20,6 +20,7 @@ export class BookDetailsComponent extends SimpleModalComponent<BookModel, any> i
   book: any;
   isCheckedOut: boolean = false;
   comments_list: CommentModel[] = [];
+  form_submitted: boolean = false;
 
   constructor(
     private bookService: BookService,
@@ -48,7 +49,9 @@ export class BookDetailsComponent extends SimpleModalComponent<BookModel, any> i
   }
 
   onSubmit({ value, valid }: { value: CommentModel, valid: boolean }) {
+    this.form_submitted = true;
     if (valid) {
+      this.form_submitted = false;
       this.bookService.addComment(value).subscribe(
         (data: CommentModel) => {
           this.comments_list.push(data);

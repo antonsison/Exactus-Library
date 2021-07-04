@@ -54,11 +54,15 @@
                 <input type="hidden" formControlName="book_id">
                 <input type="hidden" formControlName="user">
                 <div class="input-group">
-                <textarea class="form-control"  formControlName="message" placeholder="Write a comment..."></textarea>
-                <div class="input-group-append">
-                    <button class="btn btn-secondary btn-sm" type="submit">send</button>
+                    <textarea class="form-control"  formControlName="message" placeholder="Write a comment..."></textarea>
+                    <div class="input-group-append">
+                        <button class="btn btn-secondary btn-sm" type="submit">send</button>
+                    </div>
                 </div>
-                </div>
+                <small class="font-red" *ngIf="this.form.form.controls['message'].errors 
+                    && (this.form.form.controls['message'].touched || this.form_submitted)">
+                    *required
+                </small>
             </form>
         </div>
         <div class="modal-footer" [hidden]="book.owner.id===this.authService.user_id || book.is_digital_copy === true">
