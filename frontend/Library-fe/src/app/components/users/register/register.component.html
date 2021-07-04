@@ -27,10 +27,12 @@
             <label>Confirm Password:</label>
             <input class="form-control" formControlName="confirm_password" type="password">
         </div>
-        <button class="btn btn-primary" type="submit">Register</button>
+        <div class="text-right">
+            <button class="btn btn-secondary mt-3" type="submit">Register</button>
+        </div>
     </form>
 
-    <div class="form-group text-center">
+    <div class="form-group mt-3 text-center">
         <a href='#' (click)='redirectLogin($event)'>Back to Home</a>
     </div>
 </div>
