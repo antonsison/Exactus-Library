@@ -2,7 +2,7 @@ from rest_framework import serializers
 from django.utils.translation import ugettext_lazy as _
 
 from .models import Book
-from users.serializers import UserSerializer
+from user.serializers import UserSerializer
 
 
 class BookSerializer(serializers.ModelSerializer):
