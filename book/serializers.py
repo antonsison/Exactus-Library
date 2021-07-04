@@ -43,7 +43,7 @@ class AuthorSerializer(serializers.ModelSerializer):
 
 class BookSerializer(serializers.ModelSerializer):
 
-    owner = UserSerializer(required=False, allow_null=True)
+    owner = UserSerializer(required=False, allow_null=True, default=None)
     author = AuthorSerializer(required=False, allow_null=True, many=True)
 
     class Meta:
@@ -56,14 +56,15 @@ class BookSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         book = Book(
-                title=validated_data['title'],
-                status=validated_data['status'],
-                category=validated_data['category'],
-                location=validated_data['location'],
-                author=validated_data['author'],
-                owner=self.request.user,
-            )
+            title=validated_data.get('title', None),
+            category=validated_data.get('category', None),
+            location=validated_data.get('location', None),
+            owner=self.request.user,
+        )
         book.save()
+        for data in self.request.data.get('author'):
+            author = Author.objects.get(id=data.get('id'))
+            book.author.add(author)
     
     def update(self, instance, validated_data):
         title = validated_data.get('title', None)
