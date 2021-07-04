@@ -20,9 +20,10 @@ from django.contrib import admin
 from django.urls import path, re_path, include
 
 from django.views.generic.base import TemplateView
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/user/', include('user.urls')),
-    re_path('(.*)', TemplateView.as_view(template_name='base.html'), name="base"),
+    re_path('(.*)', ensure_csrf_cookie(TemplateView.as_view(template_name='base.html')), name="base"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
