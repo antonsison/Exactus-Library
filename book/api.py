@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
 
 from .models import Book, Author
-from .serializers import BookSerializer, AuthorSerializer
+from .serializers import BookSerializer, AuthorSerializer, CommentSerializer
 
 from django.db.models import Q
 
@@ -53,3 +53,45 @@ class AuthorViewSet(ViewSet):
         authors = Author.objects.all()
         serializer = self.serializer_class(authors, many=True)
         return Response(serializer.data, status=200)
+
+
+class CommentViewSet(ViewSet):
+
+    serializer_class = CommentSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def get_comments(self, *args, **kwargs):
+        serializer = self.serializer_class(
+            instance=Comment.objects.filter(
+                book__id=self.request.GET.get('book_id'), 
+                is_deleted=False
+            ).order_by('-date_created'), 
+            many=True,
+        )
+        return Response(serializer.data, status=200)
+
+    def add_comment(self, *args, **kwargs):
+        data = self.request.data
+        try:
+            book = Book.objects.get(id=data.get('book_id'))
+            comment = Comment.objects.create(
+                message=data.get('message'),
+                user=self.request.user,
+                book=book,
+            )
+            serializer = self.serializer_class(
+                instance=comment, 
+            )
+        except:
+            return Response({'status': 'An error has occured. Please try again.'}, status=400)
+        return Response(serializer.data, status=200)
+
+    def delete_comment(self, *args, **kwargs):
+        data = self.request.data
+        try:
+            comment = Comment.objects.get(id=data.get('comment_id'))
+            comment.is_deleted = True
+            comment.save()
+        except:
+            return Response({'status': 'An error has occured. Please try again.'}, status=400)
+        return Response({'status': 'Success'}, status=200)
