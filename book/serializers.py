@@ -11,7 +11,7 @@ class BookSerializer(serializers.ModelSerializer):
 
     class Meta:
         model=Book
-        fields = ('id', 'title', 'status', 'category', 'author', 'owner')
+        fields = ('id', 'title', 'status', 'category', 'location', 'author', 'owner')
     
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
@@ -22,6 +22,7 @@ class BookSerializer(serializers.ModelSerializer):
                 title=validated_data['title'],
                 status=validated_data['status'],
                 category=validated_data['category'],
+                location=validated_data['location'],
                 author=validated_data['author'],
                 owner=self.request.user,
             )
@@ -31,6 +32,7 @@ class BookSerializer(serializers.ModelSerializer):
         title = validated_data.get('title', None)
         status = validated_data.get('status', None)
         category = validated_data.get('category', None)
+        location = validated_data.get('location', None)
         author = validated_data.get('author', None)
 
         if title is not None:
@@ -41,6 +43,9 @@ class BookSerializer(serializers.ModelSerializer):
 
         if category is not None:
             instance.category = category
+
+        if location is not None:
+            instance.location = location
         
         if author is not None:
             instance.author = author
