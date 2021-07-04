@@ -5,9 +5,9 @@ from .models import User
 class UserAdmin(admin.ModelAdmin):
 
     model = User
-    readonly_fields = ('date_joined',)
+    readonly_fields = ('date_joined', 'date_updated')
     ordering = ('date_joined',)
-    list_display = ('email', 'firstname', 'lastname', 'about_me', 'date_joined', 'is_active', 'is_staff', 'is_superuser', 'avatar')
+    list_display = ('email', 'first_name', 'last_name', 'about_me', 'date_joined', 'date_updated','is_active', 'is_staff', 'is_superuser', 'avatar')
 
 
 admin.site.register(User, UserAdmin)

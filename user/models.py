@@ -7,10 +7,11 @@ from PIL import Image
 
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(('email address'), unique=True)
-    firstname = models.CharField(('first name'), max_length=30, blank=True)
-    lastname = models.CharField(('last name'), max_length=30, blank=True)
+    first_name = models.CharField(('first name'), max_length=30, blank=True)
+    last_name = models.CharField(('last name'), max_length=30, blank=True)
     about_me = models.TextField(('about me'), blank=True)
     date_joined = models.DateTimeField(('date joined'), auto_now_add=True)
+    date_updated = models.DateTimeField(auto_now=True)
     is_active = models.BooleanField(('active'), default=True)
     is_staff = models.BooleanField(('staff'), default=False)
     is_superuser = models.BooleanField(('superuser'), default=False)
@@ -33,8 +34,8 @@ class User(AbstractBaseUser, PermissionsMixin):
         """Returns the first_name plus the last_name, 
         with a space in between.
         """
-        return '{} {}'.format(self.firstname, self.lastname)
+        return '{} {}'.format(self.first_name, self.last_name)
 
     def get_short_name(self):
         # The user is identified by their email address
-        return self.firstname
+        return self.first_name
