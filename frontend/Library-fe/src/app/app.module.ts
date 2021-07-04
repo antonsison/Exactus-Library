@@ -22,7 +22,8 @@ import { DashboardComponent } from './components/main/dashboard/dashboard.compon
 import { SettingsComponent } from './components/users/settings/settings.component';
 import { OwnedBooksComponent } from './components/books/owned-books/owned-books.component';
 import { BorrowedBooksComponent } from './components/books/borrowed-books/borrowed-books.component';
-import { AuthorListComponent } from './components/books/author-list/author-list.component'
+import { AuthorListComponent } from './components/books/author-list/author-list.component';
+import { AddBookComponent } from './components/books/add-book/add-book.component'
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { AuthorListComponent } from './components/books/author-list/author-list.
     SettingsComponent,
     OwnedBooksComponent,
     BorrowedBooksComponent,
-    AuthorListComponent
+    AuthorListComponent,
+    AddBookComponent
   ],
   imports: [
     CommonModule,
