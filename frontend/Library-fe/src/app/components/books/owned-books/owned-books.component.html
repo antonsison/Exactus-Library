@@ -59,7 +59,7 @@
                 <td class="vertical-align-middle">{{ book.category }}</td>
                 <td class="vertical-align-middle">{{ book.location }}</td>
                 <td class="vertical-align-middle">
-                    <button class="btn btn-success" (click)="editBook(book)">
+                    <button class="btn btn-success" [disabled]="book.status === 'checked out'" (click)="editBook(book)">
                         Edit
                     </button>
                 </td>
