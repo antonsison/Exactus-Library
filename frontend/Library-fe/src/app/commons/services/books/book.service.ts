@@ -5,12 +5,14 @@ import {
   OWNED_BOOK, 
   ADD_BOOK, 
   UPDATE_BOOK,
-  CHECKOUT_BOOK, 
+  CHECKOUT_BOOK,
+  RETURN_BOOK, 
   BOOKS_AUTHORS, 
   ADD_AUTHOR, 
   BOOK_COMMENTS,
   ADD_COMMENT, 
-  DELETE_COMMENT, } from '../../constants/api.constants'
+  DELETE_COMMENT,
+  BORROWED_BOOKS } from '../../constants/api.constants'
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +29,14 @@ export class BookService {
 
   ownedBooks(){
     return this.http.get(OWNED_BOOK);
+  }
+
+  borrowedBooks() {
+    return this.http.get(BORROWED_BOOKS);
+  }
+
+  returnBook(book_id){
+    return this.http.post(RETURN_BOOK, {'book_id': book_id});
   }
 
   addBook(book_obj){

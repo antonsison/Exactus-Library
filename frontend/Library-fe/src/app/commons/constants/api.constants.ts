@@ -13,6 +13,8 @@ export const AUTH_USER_ID = urlsafe(USERS, 'auth-user');
  */
 export const BOOKS = '/api/book/';
 export const OWNED_BOOK = urlsafe(BOOKS, 'owned-books');
+export const BORROWED_BOOKS = urlsafe(BOOKS, 'borrowed-books')
+export const RETURN_BOOK = urlsafe(BOOKS, 'return-book')
 export const ADD_BOOK = urlsafe(BOOKS, 'add-book');
 export const UPDATE_BOOK = urlsafe(BOOKS, 'update-book');
 export const CHECKOUT_BOOK = urlsafe(BOOKS, 'checkout-book');

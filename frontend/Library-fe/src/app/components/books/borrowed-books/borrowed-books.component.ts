@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { SimpleModalService } from 'ngx-simple-modal';
 import { SearchForm } from 'src/app/commons/forms/search.forms';
-import { Book } from 'src/app/commons/models/book.model';
 import { SearchModel } from 'src/app/commons/models/search.model';
 import { BookService } from 'src/app/commons/services/books/book.service';
 import { BookDetailsComponent } from '../../main/modals/book-details/book-details.component';
+import { CheckedOutModel } from 'src/app/commons/models/checked-out.model';
+import { Book } from 'src/app/commons/models/book.model';
 
 @Component({
   selector: 'app-borrowed-books',
@@ -14,8 +15,8 @@ import { BookDetailsComponent } from '../../main/modals/book-details/book-detail
 export class BorrowedBooksComponent implements OnInit {
 
   form: SearchForm;
-  all_book: Book[] = [];
-  book_list: Book[] = [];
+  all_checked_out_book: CheckedOutModel[] = [];
+  checked_out_book_list: CheckedOutModel[] = [];
   
   constructor(
     public bookService: BookService,
@@ -25,22 +26,22 @@ export class BorrowedBooksComponent implements OnInit {
   ngOnInit(): void {
     this.form = new SearchForm(new SearchModel);
 
-    this.bookService.allBooks().subscribe(
-      (data: Book[]) => {
-        this.book_list = data;
-        this.all_book = data;
+    this.bookService.borrowedBooks().subscribe(
+      (data: CheckedOutModel[]) => {
+        this.checked_out_book_list = data;
+        console.log(data)
       }, error => {
-        console.log(error)
+        console.log(error);
       }
     )
   }
 
   onSubmit({ value, valid }: { value: SearchModel, valid: boolean }) {
     if (valid) {
-      this.book_list = this.all_book.filter(x => x.title.toLowerCase().includes(value.search_text.toLowerCase()));
+      this.checked_out_book_list = this.all_checked_out_book.filter(x => x.book.title.toLowerCase().includes(value.search_text.toLowerCase()));
     } else {
       if (value.search_text === '') {
-        this.book_list = this.all_book;
+        this.checked_out_book_list = this.all_checked_out_book;
       }
     }
   }
@@ -48,11 +49,11 @@ export class BorrowedBooksComponent implements OnInit {
   filterClick(event, status) {
     event.preventDefault();
     if (status === 'all') {
-      this.book_list = this.all_book;
+      this.checked_out_book_list = this.all_checked_out_book;
     } else if (status === 'digital copy') {
-      this.book_list = this.all_book.filter(x => x.category === 'digital copy');
+      this.checked_out_book_list = this.all_checked_out_book.filter(x => x.book.category === 'digital copy');
     } else {
-      this.book_list = this.all_book.filter(x => x.status === status);
+      this.checked_out_book_list = this.all_checked_out_book.filter(x => x.book.status === status);
     }
 
     this.form.form.controls['search_text'].setValue(null);
@@ -63,6 +64,14 @@ export class BorrowedBooksComponent implements OnInit {
     this.simpleModalService.addModal(BookDetailsComponent, { 'book': book }).subscribe(
       (modal_data: Book) => {
 
+      }
+    )
+  }
+
+  returnBook(book_id){
+    this.bookService.returnBook(book_id).subscribe(
+      data => {
+        console.log(data)
       }
     )
   }

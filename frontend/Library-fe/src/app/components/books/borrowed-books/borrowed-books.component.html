@@ -30,42 +30,38 @@
                 <th scope="col">Author/s</th>
                 <th scope="col">Status</th>
                 <th scope="col">Category</th>
-                <th scope="col">Location</th>
-                <th scope="col">Owner</th>
+                <th scope="col">Checked Out Date</th>
+                <th scope="col">Returned Date</th>
                 <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let book of book_list">
+            <tr *ngFor="let item of checked_out_book_list">
                 <th class="vertical-align-middle" scope="row">
-                    <a href="#" (click)="bookDetails($event, book)">
-                        {{ book.title }}
+                    <a href="#" (click)="bookDetails($event, item.book)">
+                        {{ item.book.title }}
                     </a>
                 </th>
                 <td class="vertical-align-middle">
-                    <p *ngFor="let author of book.author" class="mb-1">
+                    <p *ngFor="let author of item.book.author" class="mb-1">
                         {{ author.full_name }},
                     </p>
                 </td>
                 <td class="vertical-align-middle">
-                    <p class="mb-0" [ngClass]="{available: book.status==='available'}">
-                        {{ book.status }}
+                    <p class="mb-0" [ngClass]="{available: item.book.status==='available'}">
+                        {{ item.book.status }}
                     </p>
                 </td>
-                <td class="vertical-align-middle">{{ book.category }}</td>
-                <td class="vertical-align-middle">{{ book.location }}</td>
+                <td class="vertical-align-middle">{{ item.book.category }}</td>
+                <td class="vertical-align-middle">{{ item.checked_out_date | date:'medium' }}</td>
                 <td class="vertical-align-middle">
-                    <p class="mb-0" *ngIf="book.owner.full_name.trim('') !== ''">
-                        {{ book.owner.full_name }}
-                    </p>
-                    <p class="mb-0" *ngIf="book.owner.full_name.trim('') === ''">
-                        {{ book.owner.email }}
-                    </p>
+                    {{ item.returned_date | date:'medium' }}
                 </td>
                 <td class="vertical-align-middle">
-                    <button class="btn btn-danger">
+                    <button *ngIf="item.returned_date === null" (click)="returnBook(item.book.id)" class="btn btn-danger">
                         Return
                     </button>
+                    <p *ngIf="item.returned_date !== null">RETURNED</p>
                 </td>
             </tr>
         </tbody>
