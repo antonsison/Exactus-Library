@@ -18,6 +18,7 @@ export class BookDetailsComponent extends SimpleModalComponent<BookModel, any> i
 
   form: CommentForm;
   book: any;
+  isCheckedOut: boolean = false;
   comments_list: CommentModel[] = [];
 
   constructor(
@@ -32,9 +33,12 @@ export class BookDetailsComponent extends SimpleModalComponent<BookModel, any> i
     this.bookService.getComments(this.book.id).subscribe(
       (data: CommentModel[]) => {
         this.comments_list = data
-        console.log(this.comments_list)
       }
     );
+
+    if(this.book.status === 'checked out'){
+      this.isCheckedOut = true;
+    }
   }
 
   intializeForm() {
@@ -61,6 +65,17 @@ export class BookDetailsComponent extends SimpleModalComponent<BookModel, any> i
     this.bookService.deleteComment({'comment_id': comment_id}).subscribe(
       data => {
         this.comments_list = this.comments_list.filter(x => x.id !== comment_id);
+      }, error => {
+        console.log(error);
+      }
+    );
+  }
+
+  borrowBook() {
+    this.bookService.checkoutBook({book_id: this.book.id}).subscribe(
+      data => {
+        this.book.status = 'checked out';
+        this.isCheckedOut = true;
       }, error => {
         console.log(error);
       }

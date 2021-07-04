@@ -4,7 +4,8 @@ import {
   BOOKS, 
   OWNED_BOOK, 
   ADD_BOOK, 
-  UPDATE_BOOK, 
+  UPDATE_BOOK,
+  CHECKOUT_BOOK, 
   BOOKS_AUTHORS, 
   ADD_AUTHOR, 
   BOOK_COMMENTS,
@@ -34,6 +35,10 @@ export class BookService {
 
   updateBook(book_obj){
     return this.http.put(UPDATE_BOOK, book_obj);
+  }
+
+  checkoutBook(data) {
+    return this.http.post(CHECKOUT_BOOK, data);
   }
 
   allAuthors(){

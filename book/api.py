@@ -14,7 +14,7 @@ class BookViewSet(ViewSet):
     permission_classes = (IsAuthenticated,)
 
     def all_books(self, *args, **kwargs):
-        books = Book.objects.all()
+        books = Book.objects.all().order_by('-date_created')
         serializer = self.serializer_class(books, many=True)
         return Response(serializer.data, status=200)
 
