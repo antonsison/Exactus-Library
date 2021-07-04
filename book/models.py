@@ -10,7 +10,7 @@ class Author(models.Model):
     last_name = models.CharField(max_length=100, blank=True)
 
     def __str__(self):
-        return "{}{}".format(first_name, last_name)
+        return "{}{}".format(self.first_name, self.last_name)
 
 
 class Book(models.Model):
@@ -44,7 +44,7 @@ class Book(models.Model):
     status = models.CharField(default=AVAILABLE, max_length=255, choices=STATUS_CHOICES)
     category = models.CharField(default=HARDCOVER, max_length=255, choices=TYPE_CHOICES)
     author = models.ManyToManyField(Author, blank=True)
-    owner = models.CharField(max_length=255, blank=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
 
