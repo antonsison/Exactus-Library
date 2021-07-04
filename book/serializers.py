@@ -11,6 +11,31 @@ class AuthorSerializer(serializers.ModelSerializer):
         model = Author
         fields = ('id', 'email', 'first_name', 'last_name')
 
+    
+    def __init__(self, *args, **kwargs):
+        return super(AuthorSerializer, self).__init__(*args, **kwargs)
+
+    def create(self, validated_data):
+        author = Author(
+                email=validated_data['email'],
+                first_name=validated_data['first_name'],
+                last_name=validated_data['last_name'],
+            )
+        author.save()
+
+    def save(self, **kwargs):
+        validated_data = dict(
+            list(self.validated_data.items()) +
+            list(kwargs.items())
+        )
+
+        if self.instance is not None:
+            self.instance = self.update(self.instance, validated_data)
+        else:
+            self.instance = self.create(validated_data)
+            
+        return self.instance
+
 
 class BookSerializer(serializers.ModelSerializer):
 

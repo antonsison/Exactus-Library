@@ -54,6 +54,14 @@ class AuthorViewSet(ViewSet):
         serializer = self.serializer_class(authors, many=True)
         return Response(serializer.data, status=200)
 
+    def add_author(self, *args, **kwargs):
+        serializer = self.serializer_class(
+            data=self.request.data, request=self.request
+        )
+        if serializer.is_valid(raise_exception=True):
+            serializer.save() 
+        return Response({}, status=200)
+
 
 class CommentViewSet(ViewSet):
 
