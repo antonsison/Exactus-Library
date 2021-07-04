@@ -1,9 +1,9 @@
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
 
-from .models import Book
-from .serializers import BookSerializer
+from .models import Book, Author
+from .serializers import BookSerializer, AuthorSerializer
 
 from django.db.models import Q
 
@@ -42,3 +42,14 @@ class BookViewSet(ViewSet):
         if serializer.is_valid(raise_exception=True):
             serializer.save() 
         return Response({}, status=200)
+
+
+class AuthorViewSet(ViewSet):
+
+    serializer_class = AuthorSerializer
+    permission_classes = (AllowAny,)
+
+    def get(self, *args, **kwargs):
+        authors = Author.objects.all()
+        serializer = self.serializer_class(authors, many=True)
+        return Response(serializer.data, status=200)

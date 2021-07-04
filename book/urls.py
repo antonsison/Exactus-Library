@@ -1,5 +1,5 @@
 from django.urls import path, re_path
-from .api import BookViewSet
+from .api import BookViewSet, AuthorViewSet
 
 urlpatterns = [
     path('', BookViewSet.as_view({
@@ -14,4 +14,7 @@ urlpatterns = [
     path('update-book/', BookViewSet.as_view({
         'put': 'update_book',
     }), name="update_book"),
+    path('authors/', AuthorViewSet.as_view({
+        'get': 'get',
+    }), name="author-list"),
 ]
