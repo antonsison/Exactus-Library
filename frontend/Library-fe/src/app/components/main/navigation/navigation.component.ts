@@ -22,6 +22,8 @@ export class NavigationComponent implements OnInit {
 
     this.auth.getUser();
 
+    console.log(this.auth.user)
+
   }
 
   dropdownClick(event){
