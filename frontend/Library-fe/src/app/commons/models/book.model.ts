@@ -6,6 +6,7 @@ export class Book {
     title          : string = null;
     status         : string = null;
     category       : string = null;
+    location       : string = null;
     author         : Author;
     owner          : User;
     date_created   : string = null;
