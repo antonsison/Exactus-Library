@@ -1,16 +1,24 @@
 from rest_framework import serializers
 from django.utils.translation import ugettext_lazy as _
 
-from .models import Book
+from .models import Book, Author
 from user.serializers import UserSerializer
+
+
+class AuthorSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Author
+        fields = ('id', 'email', 'first_name', 'last_name')
 
 
 class BookSerializer(serializers.ModelSerializer):
 
     owner = UserSerializer(required=False, allow_null=True)
+    author = AuthorSerializer(required=False, allow_null=True)
 
     class Meta:
-        model=Book
+        model = Book
         fields = ('id', 'title', 'status', 'category', 'location', 'author', 'owner')
     
     def __init__(self, *args, **kwargs):
