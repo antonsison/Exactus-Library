@@ -40,16 +40,28 @@ class Book(models.Model):
         (DIGITAL_COPY, 'Digital Copy')
     )
 
+    # Location choices
+    EXACTUS_OFFICE = 'exactus office'
+    OWNERS_HOME = "owner's home"
+    IN_THE_MATRIX = 'in the matrix'
+
+    LOCATION_CHOICES = (
+        (EXACTUS_OFFICE, 'Exactus Office'),
+        (OWNERS_HOME, "Owner's Home"),
+        (IN_THE_MATRIX, 'In the Matrix'),
+    )
+
     title = models.CharField(max_length=255, blank=True)
     status = models.CharField(default=AVAILABLE, max_length=255, choices=STATUS_CHOICES)
     category = models.CharField(default=HARDCOVER, max_length=255, choices=TYPE_CHOICES)
+    location = models.CharField(default=EXACTUS_OFFICE, max_length=255, choices=LOCATION_CHOICES)
     author = models.ManyToManyField(Author, blank=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
 
     class Meta:
-        unique_together = ('title', 'status', 'category', 'owner'),
+        unique_together = ('title', 'category', 'location', 'owner'),
 
     def __str__(self):
         return "{}".format(self.title)
