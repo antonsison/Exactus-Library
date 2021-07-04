@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StateService } from '@uirouter/core';
 import { AuthService } from 'src/app/commons/services/auth/auth.service';
-import { User } from 'src/app/commons/models/user.model';
 
 @Component({
   selector: 'app-navigation',
@@ -17,11 +16,11 @@ export class NavigationComponent implements OnInit {
 
   async ngOnInit() {
 
-    // if (this.auth.user.id == null) {
-    //   await this.auth.setuser();
-    // }
+    if (this.auth.user.id == null) {
+      await this.auth.setuser();
+    }
 
-    // this.auth.getUser();
+    this.auth.getUser();
 
   }
 

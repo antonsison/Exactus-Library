@@ -4,7 +4,6 @@ export class User {
     first_name    : string = null;
     last_name     : string = null;
     full_name     : string = null;
-    has_usable_pass : boolean = null;
     avatar         : any = null;
     date_joined  : string = null;
     date_updated : string = null;
@@ -17,9 +16,9 @@ export class User {
 
 export class ShortUser {
     id          : string = null;
-    email       : string = null; 
+    email       : string = null;
     first_name  : string = null;
-    full_name   : string = null;
     last_name   : string = null;
+    full_name   : string = null;
     avatar       : string = null;
 }
