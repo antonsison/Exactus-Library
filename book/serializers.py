@@ -57,6 +57,7 @@ class BookSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         book = Book(
             title=validated_data.get('title', None),
+            status=validated_data.get('status', None),
             category=validated_data.get('category', None),
             location=validated_data.get('location', None),
             owner=self.request.user,
