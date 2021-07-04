@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BOOKS, OWNED_BOOK, BOOKS_AUTHORS } from '../../constants/api.constants'
+import { BOOKS, OWNED_BOOK, BOOKS_AUTHORS, ADD_AUTHOR } from '../../constants/api.constants'
 
 @Injectable({
   providedIn: 'root'
@@ -21,5 +21,9 @@ export class BookService {
 
   allAuthors(){
     return this.http.get(BOOKS_AUTHORS)
+  }
+
+  addAuthor(author_obj){
+    return this.http.post(ADD_AUTHOR, author_obj)
   }
 }
