@@ -24,6 +24,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/book/', include('book.urls')),
     path('api/user/', include('user.urls')),
     re_path('(.*)', ensure_csrf_cookie(TemplateView.as_view(template_name='base.html')), name="base"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
