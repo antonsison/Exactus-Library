@@ -71,7 +71,7 @@ class BookSerializer(serializers.ModelSerializer):
         status = validated_data.get('status', None)
         category = validated_data.get('category', None)
         location = validated_data.get('location', None)
-        author = validated_data.get('author', None)
+        author = self.request.data.get('author')
 
         if title is not None:
             instance.title = title
@@ -85,8 +85,11 @@ class BookSerializer(serializers.ModelSerializer):
         if location is not None:
             instance.location = location
         
+        instance.author.clear()
         if author is not None:
-            instance.author = author
+            for data in author:
+                book_author = Author.objects.get(id=data.get('id'))
+                instance.author.add(book_author)
 
         instance.save()
         return instance
