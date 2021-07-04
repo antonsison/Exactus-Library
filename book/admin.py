@@ -10,10 +10,7 @@ class BookAdmin(admin.ModelAdmin):
     filter_horizontal = (
         'author',
     )
-    list_display = ('title', 'status', 'category', 'owner', 'date_created', 'date_updated')
-
-    # def get_authors(self):
-    #     return ",".join([author for author in self.author.all()])
+    list_display = ('title', 'status', 'category', 'location', 'owner', 'date_created', 'date_updated')
 
 
 class AuthorAdmin(admin.ModelAdmin):
