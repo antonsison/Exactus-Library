@@ -56,7 +56,7 @@ class AuthorViewSet(ViewSet):
 
     def add_author(self, *args, **kwargs):
         serializer = self.serializer_class(
-            data=self.request.data, request=self.request
+            data=self.request.data
         )
         if serializer.is_valid(raise_exception=True):
             serializer.save() 
