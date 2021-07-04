@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { StateService } from '@uirouter/core';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { BookForm } from 'src/app/commons/forms/book.forms';
 import { Author } from 'src/app/commons/models/author.model';
 import { Book } from 'src/app/commons/models/book.model';
 import { BookService } from 'src/app/commons/services/books/book.service';
-import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 @Component({
   selector: 'app-add-book',

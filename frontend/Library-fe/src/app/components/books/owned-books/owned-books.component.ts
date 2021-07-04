@@ -5,7 +5,8 @@ import { SearchForm } from 'src/app/commons/forms/search.forms';
 import { Book } from 'src/app/commons/models/book.model';
 import { SearchModel } from 'src/app/commons/models/search.model';
 import { BookService } from 'src/app/commons/services/books/book.service';
-import { EditBookComponent } from 'src/app/components/main/modals/edit-book/edit-book.component'
+import { EditBookComponent } from 'src/app/components/main/modals/edit-book/edit-book.component';
+import { BookDetailsComponent } from 'src/app/components/main/modals/book-details/book-details.component';
 
 @Component({
   selector: 'app-owned-books',
@@ -82,5 +83,14 @@ export class OwnedBooksComponent implements OnInit {
     }
 
     this.form.form.controls['search_text'].setValue(null);
+  }
+
+  bookDetails(event, book){
+    event.preventDefault()
+    this.simpleModalService.addModal(BookDetailsComponent, { 'book': book }).subscribe(
+      (modal_data: Book) => {
+
+      }
+    )
   }
 }
