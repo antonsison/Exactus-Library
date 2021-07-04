@@ -61,7 +61,7 @@ export class AddBookComponent implements OnInit {
       'author': this.selectedItems
     })
     if (valid && this.selectedItems.length != 0) {
-      this.bookService.addBook(value).subscribe(
+      this.bookService.addBook(this.form.form.value).subscribe(
         (data: Book) => {
           this.state.go('owned-books')
         }, error => {
