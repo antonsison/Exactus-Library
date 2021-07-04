@@ -9,6 +9,14 @@
         </div>
 
         <div>
+            <label>Author:</label>
+            <select class="form-control" formControlName="author">
+                <option value=""></option>
+                <option *ngFor="let author of author_list" value="author.id"> {{ author.last_name }} {{author.first_name}}</option>
+            </select>
+        </div>
+
+        <div>
             <label>Category:</label>
             <select class="form-control" formControlName="category" (change)="onChangeCategory()">
                 <option value="hardcover">Hardcover</option>

@@ -24,7 +24,8 @@ import { OwnedBooksComponent } from './components/books/owned-books/owned-books.
 import { BorrowedBooksComponent } from './components/books/borrowed-books/borrowed-books.component';
 import { AuthorListComponent } from './components/books/author-list/author-list.component';
 import { AddBookComponent } from './components/books/add-book/add-book.component';
-import { AddAuthorComponent } from './components/books/add-author/add-author.component'
+import { AddAuthorComponent } from './components/books/add-author/add-author.component';
+import { EditBookComponent } from './components/main/modals/edit-book/edit-book.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { AddAuthorComponent } from './components/books/add-author/add-author.com
     BorrowedBooksComponent,
     AuthorListComponent,
     AddBookComponent,
-    AddAuthorComponent
+    AddAuthorComponent,
+    EditBookComponent,
   ],
   imports: [
     CommonModule,

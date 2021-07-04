@@ -15,4 +15,5 @@ export const BOOKS = '/api/book/';
 export const OWNED_BOOK = urlsafe(BOOKS, 'owned-books');
 export const BOOKS_AUTHORS = urlsafe(BOOKS, 'authors');
 export const ADD_AUTHOR = urlsafe(BOOKS, 'add-author');
-export const ADD_BOOK = urlsafe(BOOKS, 'add-book')
+export const ADD_BOOK = urlsafe(BOOKS, 'add-book');
+export const UPDATE_BOOK = urlsafe(BOOKS, 'update-book');

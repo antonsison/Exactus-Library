@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { StateService } from '@uirouter/core';
+import { SimpleModalService } from 'ngx-simple-modal';
 import { SearchForm } from 'src/app/commons/forms/search.forms';
 import { Book } from 'src/app/commons/models/book.model';
 import { SearchModel } from 'src/app/commons/models/search.model';
 import { BookService } from 'src/app/commons/services/books/book.service';
+import { EditBookComponent } from 'src/app/components/main/modals/edit-book/edit-book.component'
 
 @Component({
   selector: 'app-owned-books',
@@ -19,6 +21,7 @@ export class OwnedBooksComponent implements OnInit {
   constructor(
     public state: StateService,
     public bookService: BookService,
+    private simpleModalService: SimpleModalService
   ) { }
 
   ngOnInit(): void {
@@ -37,6 +40,24 @@ export class OwnedBooksComponent implements OnInit {
   addBook(event){
     event.preventDefault();
     this.state.go('add-book')
+  }
+
+  editBook(book){
+    this.simpleModalService.addModal(EditBookComponent, {'book': book}).subscribe(
+      (modal_data: Book) => {
+        if(modal_data) {
+          this.bookService.updateBook(modal_data).subscribe(
+            (data: Book) => {
+              book.title=modal_data.title
+              book.location=modal_data.location
+              book.category=modal_data.category
+            }, error => {
+              console.log(error)
+            }
+          )
+        }
+      }
+    )
   }
 
   onSubmit({ value, valid }: { value: SearchModel, valid: boolean }) {

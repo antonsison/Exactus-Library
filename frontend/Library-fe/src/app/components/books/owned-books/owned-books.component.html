@@ -36,6 +36,7 @@
                 <th scope="col">Status</th>
                 <th scope="col">Category</th>
                 <th scope="col">Location</th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
@@ -53,6 +54,11 @@
                 </td>
                 <td class="vertical-align-middle">{{ book.category }}</td>
                 <td class="vertical-align-middle">{{ book.location }}</td>
+                <td class="vertical-align-middle">
+                    <button class="btn btn-success" (click)="editBook(book)">
+                        Edit
+                    </button>
+                </td>
             </tr>
         </tbody>
     </table>

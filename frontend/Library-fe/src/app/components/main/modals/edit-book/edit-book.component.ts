@@ -1,34 +1,40 @@
 import { Component, OnInit } from '@angular/core';
-import { StateService } from '@uirouter/core';
+import { SimpleModalComponent } from "ngx-simple-modal";
 import { BookForm } from 'src/app/commons/forms/book.forms';
 import { Author } from 'src/app/commons/models/author.model';
 import { Book } from 'src/app/commons/models/book.model';
 import { BookService } from 'src/app/commons/services/books/book.service';
 
+export interface BookModel {
+  book: any
+}
+
 @Component({
-  selector: 'app-add-book',
-  templateUrl: './add-book.component.html',
-  styleUrls: ['./add-book.component.css']
+  selector: 'app-edit-book',
+  templateUrl: './edit-book.component.html',
+  styleUrls: ['./edit-book.component.css']
 })
-export class AddBookComponent implements OnInit {
+export class EditBookComponent extends SimpleModalComponent<BookModel, any> implements OnInit {
 
   form: BookForm;
+  book: any;
   all_author: Author[] = [];
   author_list: Author[] = [];
 
   constructor(
-    private bookService: BookService,
-    private state: StateService,
-  ) { }
+    private bookService: BookService
+  ) {
+    super();
+  }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.form = new BookForm(new Book);
+    this.form.form.patchValue(this.book);
 
     this.bookService.allAuthors().subscribe(
       (data: Author[]) => {
         this.all_author = data;
         this.author_list = data;
-        console.log(data)
       }, error => {
         console.log(error)
       }
@@ -46,13 +52,11 @@ export class AddBookComponent implements OnInit {
 
   onSubmit({ value, valid }: { value: Book, valid: boolean }) {
     if (valid) {
-      this.bookService.addBook(value).subscribe(
-        (data: Book) => {
-          this.state.go('owned-books')
-        }, error => {
-          console.log(error)
-        }
-      )
+      if (this.form.form.dirty) {
+        this.result = value;
+      }
+      this.close();
     }
   }
+
 }

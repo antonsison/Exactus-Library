@@ -7,7 +7,7 @@ export class Book {
     status         : string = null;
     category       : string = null;
     location       : string = null;
-    author         : Author;
+    author         : Author[] = [];
     owner          : User;
     date_created   : string = null;
 
