@@ -1,0 +1,8 @@
+a.nav-item.nav-link.active {
+    color: blue;
+}
+
+.navigation-title {
+    color:green;
+    font-weight: bold;
+}
