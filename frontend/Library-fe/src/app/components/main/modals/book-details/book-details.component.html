@@ -6,9 +6,9 @@
         </div>
         <div class="modal-body">
             <div>
-                <h2 class="mb-0">
+                <h3 class="mb-0">
                     {{ book.title }}
-                </h2>
+                </h3>
                 <small>by: <span *ngFor="let author of book.author"> {{author.full_name}}, </span></small>
                 <hr>
                 <table class="table">
@@ -31,13 +31,13 @@
                 </table>
                 <hr>
                 <h6>Comments ({{ comments_list.length }}):</h6>
-                <div class="comment-section" style="max-height: 200px; overflow: auto;">
+                <div class="comment-section" style="max-height: 100px; overflow: auto;">
                     <div class="d-flex align-items-center pt-2 pb-3 border-bottom" *ngFor="let comment of comments_list" >
                     <div class="ml-3" style="line-height: 0.5;">
                         <h6 class="mb-0">
                         <table>
                             <tr>
-                            <td class="pb-0 pt-0">{{ comment.user.full_name | titlecase }} </td>
+                            <td class="pb-0 pt-0">{{ comment.user.email }} </td>
                             <td class="pb-0 pt-0"><small class="text-muted pl-2" style="font-size: 10px; margin-top: 2px;">{{ comment.date_created | date:'medium' }}</small></td>
                             <td class="pb-0 pt-0"><p></p></td>
                             <td class="pb-0 pt-0">
@@ -49,18 +49,17 @@
                         <small class="text-muted mb-0">{{ comment.message }}</small> <br>
                     </div>
                 </div>
-
-                <form class="form-group" [formGroup]="form.form" (ngSubmit)="onSubmit(form.form)">
-                    <input type="hidden" formControlName="book_id">
-                    <input type="hidden" formControlName="user">
-                    <div class="input-group">
-                    <textarea class="form-control"  formControlName="message" placeholder="Write a comment..."></textarea>
-                    <div class="input-group-append">
-                        <button class="btn btn-secondary btn-sm" type="submit">send</button>
-                    </div>
-                    </div>
-                </form>
             </div>
+            <form class="form-group" [formGroup]="form.form" (ngSubmit)="onSubmit(form.form)">
+                <input type="hidden" formControlName="book_id">
+                <input type="hidden" formControlName="user">
+                <div class="input-group">
+                <textarea class="form-control"  formControlName="message" placeholder="Write a comment..."></textarea>
+                <div class="input-group-append">
+                    <button class="btn btn-secondary btn-sm" type="submit">send</button>
+                </div>
+                </div>
+            </form>
         </div>
         <div class="modal-footer" [hidden]="book.owner.id===this.authService.user_id || book.is_digital_copy === true">
             <button type="button" class="btn btn-primary btn-block" [hidden]="book.status==='checked out'">Check Out</button>

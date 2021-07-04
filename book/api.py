@@ -2,7 +2,7 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
 
-from .models import Book, Author, Checkout
+from .models import Book, Author, Checkout, Comment
 from .serializers import BookSerializer, AuthorSerializer, CommentSerializer, CheckoutSerializer
 
 from django.db.models import Q
@@ -69,11 +69,12 @@ class CommentViewSet(ViewSet):
     permission_classes = (IsAuthenticated,)
 
     def get_comments(self, *args, **kwargs):
+        
         serializer = self.serializer_class(
             instance=Comment.objects.filter(
                 book__id=self.request.GET.get('book_id'), 
                 is_deleted=False
-            ).order_by('-date_created'), 
+            ).order_by('date_created'), 
             many=True,
         )
         return Response(serializer.data, status=200)

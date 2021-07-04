@@ -18,7 +18,7 @@ export class BookDetailsComponent extends SimpleModalComponent<BookModel, any> i
 
   form: CommentForm;
   book: any;
-  comments_list: Comment[] = [];
+  comments_list: CommentModel[] = [];
 
   constructor(
     private bookService: BookService,
@@ -30,8 +30,9 @@ export class BookDetailsComponent extends SimpleModalComponent<BookModel, any> i
   ngOnInit() {
     this.intializeForm();
     this.bookService.getComments(this.book.id).subscribe(
-      (data: Comment) => {
-        this.comments_list = []
+      (data: CommentModel[]) => {
+        this.comments_list = data
+        console.log(this.comments_list)
       }
     );
   }
@@ -44,26 +45,26 @@ export class BookDetailsComponent extends SimpleModalComponent<BookModel, any> i
 
   onSubmit({ value, valid }: { value: CommentModel, valid: boolean }) {
     if (valid) {
-      // this.bookService.addComment(value).subscribe(
-      //   data => {
-      //     this.comments_list.unshift(data);
-      //     this.intializeForm();
-      //   }, error => {
-      //     console.log(error);
-      //     this.intializeForm();
-      //   }
-      // );
+      this.bookService.addComment(value).subscribe(
+        (data: CommentModel) => {
+          this.comments_list.push(data);
+          this.intializeForm();
+        }, error => {
+          console.log(error);
+          this.intializeForm();
+        }
+      );
     }
   }
 
   deleteClick(comment_id) {
-    // this.bookService.deleteComment({'comment_id': comment_id}).subscribe(
-    //   data => {
-    //     this.comments_list = this.comments_list.filter(x => x.id !== comment_id);
-    //   }, error => {
-    //     console.log(error);
-    //   }
-    // );
+    this.bookService.deleteComment({'comment_id': comment_id}).subscribe(
+      data => {
+        this.comments_list = this.comments_list.filter(x => x.id !== comment_id);
+      }, error => {
+        console.log(error);
+      }
+    );
   }
 
 }

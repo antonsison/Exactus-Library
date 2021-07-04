@@ -18,3 +18,5 @@ export const ADD_AUTHOR = urlsafe(BOOKS, 'add-author');
 export const ADD_BOOK = urlsafe(BOOKS, 'add-book');
 export const UPDATE_BOOK = urlsafe(BOOKS, 'update-book');
 export const BOOK_COMMENTS = urlsafe(BOOKS, 'comments');
+export const DELETE_COMMENT = urlsafe(BOOKS, 'delete-comment');
+export const ADD_COMMENT = urlsafe(BOOKS, 'add-comment');
