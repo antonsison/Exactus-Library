@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.utils.translation import ugettext_lazy as _
 
-from .models import Book, Author, Comment
+from .models import Book, Author, Comment, Checkout
 from user.serializers import UserSerializer
 
 
@@ -116,6 +116,33 @@ class CommentSerializer(serializers.ModelSerializer):
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
         return super(CommentSerializer, self).__init__(*args, **kwargs)
+
+    def save(self, **kwargs):
+        validated_data = dict(
+            list(self.validated_data.items()) +
+            list(kwargs.items())
+        )
+
+        if self.instance is not None:
+            self.instance = self.update(self.instance, validated_data)
+        else:
+            self.instance = self.create(validated_data)
+            
+        return self.instance
+
+
+class CheckoutSerializer(serializers.ModelSerializer):
+    
+    book = BookSerializer(required=False, allow_null=True)
+    checked_out_by = UserSerializer(required=False, allow_null=True)
+
+    class Meta:
+        model=Checkout
+        fields = ('id', 'book', 'checked_out_by', 'checked_out_date', 'returned_date')
+    
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        return super(CheckoutSerializer, self).__init__(*args, **kwargs)
 
     def save(self, **kwargs):
         validated_data = dict(
