@@ -17,4 +17,7 @@ urlpatterns = [
     path('authors/', AuthorViewSet.as_view({
         'get': 'get',
     }), name="author-list"),
+    path('add-author/', AuthorViewSet.as_view({
+        'post': 'add_author',
+    }), name="add_author"),
 ]
