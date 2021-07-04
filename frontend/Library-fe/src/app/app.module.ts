@@ -21,7 +21,8 @@ import { FooterComponent } from './components/main/footer/footer.component';
 import { DashboardComponent } from './components/main/dashboard/dashboard.component';
 import { SettingsComponent } from './components/users/settings/settings.component';
 import { OwnedBooksComponent } from './components/books/owned-books/owned-books.component';
-import { BorrowedBooksComponent } from './components/books/borrowed-books/borrowed-books.component'
+import { BorrowedBooksComponent } from './components/books/borrowed-books/borrowed-books.component';
+import { AuthorListComponent } from './components/books/author-list/author-list.component'
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { BorrowedBooksComponent } from './components/books/borrowed-books/borrow
     DashboardComponent,
     SettingsComponent,
     OwnedBooksComponent,
-    BorrowedBooksComponent
+    BorrowedBooksComponent,
+    AuthorListComponent
   ],
   imports: [
     CommonModule,
