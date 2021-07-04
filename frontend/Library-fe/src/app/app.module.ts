@@ -1,11 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UIRouterModule } from '@uirouter/angular';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 import { CookieService } from 'ngx-cookie-service';
 import { SimpleModalModule } from 'ngx-simple-modal';
@@ -45,10 +46,12 @@ import { EditBookComponent } from './components/main/modals/edit-book/edit-book.
   ],
   imports: [
     CommonModule,
+    FormsModule,
     ReactiveFormsModule,
     BrowserModule,
     HttpClientModule,
     UIRouterModule.forRoot(APP_STATES),
+    NgMultiSelectDropDownModule.forRoot(),
     SimpleModalModule,
     NgbModule,
   ],

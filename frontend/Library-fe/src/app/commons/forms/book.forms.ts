@@ -10,7 +10,7 @@ export class BookForm {
     this.form = new FormBuilder().group({
       id          : new FormControl(null),
       title       : new FormControl(null, [Validators.required]),
-      author      : new FormControl(null, [Validators.required]),
+      author      : new FormControl(null),
       category    : new FormControl(null, [Validators.required]),
       location    : new FormControl(null, [Validators.required]),
     });

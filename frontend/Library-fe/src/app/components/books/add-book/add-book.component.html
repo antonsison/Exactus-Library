@@ -10,10 +10,14 @@
 
         <div>
             <label>Author:</label>
-            <select class="form-control" formControlName="author">
-                <option value=""></option>
-                <option *ngFor="let author of author_list" value="author.id"> {{ author.last_name }} {{author.first_name}}</option>
-            </select>
+            <ng-multiselect-dropdown
+                [placeholder]="''"
+                [settings]="dropdownSettings"
+                [data]="author_list"
+                [(ngModel)]="selectedItems"
+                [ngModelOptions]="{standalone: true}"
+            >
+            </ng-multiselect-dropdown>
         </div>
 
         <div>

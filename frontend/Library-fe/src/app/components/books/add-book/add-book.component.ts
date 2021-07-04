@@ -4,6 +4,7 @@ import { BookForm } from 'src/app/commons/forms/book.forms';
 import { Author } from 'src/app/commons/models/author.model';
 import { Book } from 'src/app/commons/models/book.model';
 import { BookService } from 'src/app/commons/services/books/book.service';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 @Component({
   selector: 'app-add-book',
@@ -13,6 +14,8 @@ import { BookService } from 'src/app/commons/services/books/book.service';
 export class AddBookComponent implements OnInit {
 
   form: BookForm;
+  dropdownSettings: IDropdownSettings = {};
+  selectedItems = [];
   all_author: Author[] = [];
   author_list: Author[] = [];
 
@@ -28,11 +31,20 @@ export class AddBookComponent implements OnInit {
       (data: Author[]) => {
         this.all_author = data;
         this.author_list = data;
-        console.log(data)
       }, error => {
         console.log(error)
       }
     )
+
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'id',
+      textField: 'first_name',
+      selectAllText: 'Select All',
+      unSelectAllText: 'Unselect All',
+      itemsShowLimit: 5,
+      allowSearchFilter: true
+    };
   }
 
   onChangeCategory(){
@@ -45,7 +57,10 @@ export class AddBookComponent implements OnInit {
   }
 
   onSubmit({ value, valid }: { value: Book, valid: boolean }) {
-    if (valid) {
+    this.form.form.patchValue({
+      'author': this.selectedItems
+    })
+    if (valid && this.selectedItems.length != 0) {
       this.bookService.addBook(value).subscribe(
         (data: Book) => {
           this.state.go('owned-books')
