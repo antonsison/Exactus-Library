@@ -10,7 +10,7 @@ class Author(models.Model):
     last_name = models.CharField(max_length=100, blank=True)
 
     def __str__(self):
-        return "{}{}".format(self.first_name, self.last_name)
+        return "{} {}".format(self.first_name, self.last_name)
 
 
 class Book(models.Model):

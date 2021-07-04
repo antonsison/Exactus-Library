@@ -7,11 +7,12 @@ from user.serializers import UserSerializer
 
 class AuthorSerializer(serializers.ModelSerializer):
 
+    full_name = serializers.SerializerMethodField(read_only=True)
+
     class Meta:
         model = Author
-        fields = ('id', 'email', 'first_name', 'last_name')
+        fields = ('id', 'email', 'first_name', 'last_name', 'full_name')
 
-    
     def __init__(self, *args, **kwargs):
         return super(AuthorSerializer, self).__init__(*args, **kwargs)
 
@@ -35,6 +36,9 @@ class AuthorSerializer(serializers.ModelSerializer):
             self.instance = self.create(validated_data)
             
         return self.instance
+
+    def get_full_name(self, instance):
+        return instance.__str__()
 
 
 class BookSerializer(serializers.ModelSerializer):
