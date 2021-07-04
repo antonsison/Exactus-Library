@@ -10,7 +10,7 @@
         </div>
     </div>
 
-    <form class="form-group" [formGroup]="form.form">
+    <form class="form-group" [formGroup]="form.form" (ngSubmit)="onSubmit(form.form)">
         <div class="input-group mb-3">
             <input type="text" formControlName="search_text" class="form-control" placeholder="Search Title" aria-label="Search" aria-describedby="basic-addon2">
             <div class="input-group-append">
@@ -19,10 +19,10 @@
             <div class="input-group-append" ngbDropdown>
                 <button class="btn btn-primary" id="dropdownBasic1" ngbDropdownToggle><i class="la la-filter"></i> Filter</button>
                 <div ngbDropdownMenu aria-labelledby="dropdownBasic1" >
-                    <a class="dropdown-item" href="." ngbDropdownItem >All</a>
-                    <a class="dropdown-item" href="#" ngbDropdownItem >Available</a>
-                    <a class="dropdown-item" href="#" ngbDropdownItem >Checked Out</a>
-                    <a class="dropdown-item" href="#" ngbDropdownItem >Digital Copy</a>
+                    <a class="dropdown-item" href="." ngbDropdownItem (click)="filterClick($event, 'all')">All</a>
+                    <a class="dropdown-item" href="#" ngbDropdownItem (click)="filterClick($event, 'available')">Available</a>
+                    <a class="dropdown-item" href="#" ngbDropdownItem (click)="filterClick($event, 'checked out')">Checked Out</a>
+                    <a class="dropdown-item" href="#" ngbDropdownItem (click)="filterClick($event, 'digital copy')">Digital Copy</a>
                 </div>
             </div>
         </div>
@@ -31,30 +31,28 @@
     <table class="table mt-2">
         <thead class="thead-dark">
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">Title</th>
+                <th scope="col">Author/s</th>
+                <th scope="col">Status</th>
+                <th scope="col">Category</th>
+                <th scope="col">Location</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
+            <tr *ngFor="let book of book_list">
+                <th class="vertical-align-middle" scope="row">{{ book.title }}</th>
+                <td class="vertical-align-middle">
+                    <p *ngFor="let author of book.author" class="mb-1">
+                        {{ author.last_name }} {{ author.first_name }},
+                    </p>
+                </td>
+                <td class="vertical-align-middle">
+                    <p class="mb-0" [ngClass]="{available: book.status==='available'}">
+                        {{ book.status }}
+                    </p>
+                </td>
+                <td class="vertical-align-middle">{{ book.category }}</td>
+                <td class="vertical-align-middle">{{ book.location }}</td>
             </tr>
         </tbody>
     </table>

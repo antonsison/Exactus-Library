@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BOOKS } from '../../constants/api.constants'
-import { Book } from '../../models/book.model'
+import { BOOKS, OWNED_BOOK } from '../../constants/api.constants'
 
 @Injectable({
   providedIn: 'root'
@@ -13,12 +12,10 @@ export class BookService {
   ) { }
 
   allBooks(){
-    this.http.get(BOOKS).subscribe(
-      (data: Book) => {
-        console.log(data)
-      }, error => {
-        console.log(error)
-      }
-    )
+    return this.http.get(BOOKS)
+  }
+
+  ownedBooks(){
+    return this.http.get(OWNED_BOOK)
   }
 }

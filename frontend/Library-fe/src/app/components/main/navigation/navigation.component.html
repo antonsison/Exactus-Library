@@ -8,7 +8,9 @@
 
     <div ngbDropdown class="navbar-nav ml-auto">
         <a ngbDropdownToggle class="nav-item nav-link dropdown-toggle" href="#" (click)="dropdownClick($event)">
-            {{ auth.user.full_name }}
+            <span>
+                {{ auth.user.email }}
+            </span>
         </a>
         <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
             <a ngbDropdownItem class="dropdown-item" (click)="navigationRedirect($event, 'add-book')" href="#">Add a Books</a>

@@ -1,0 +1,8 @@
+.vertical-align-middle{
+    vertical-align: middle;
+}
+
+.available {
+    color: green;
+    font-weight: bold;
+}
