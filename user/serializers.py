@@ -95,3 +95,28 @@ class RegisterSerializer(serializers.ModelSerializer):
         user.is_active = True
         user.save()
         return user
+
+
+class UserSerializer(serializers.ModelSerializer):
+
+    full_name = serializers.SerializerMethodField(read_only=True)
+
+    class Meta:
+        model = User
+        fields = (
+            'id',
+            'email',
+            'first_name',
+            'last_name',
+            'full_name',
+            'date_joined',
+            'date_updated',
+        )
+
+    def __init__(self, *args, **kwargs):
+        return super(UserSerializer, self).__init__(*args, **kwargs)
+
+    def get_full_name(self, instance):
+        """Return full name
+        """
+        return instance.get_full_name()
