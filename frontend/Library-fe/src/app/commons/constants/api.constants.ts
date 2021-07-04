@@ -13,10 +13,13 @@ export const AUTH_USER_ID = urlsafe(USERS, 'auth-user');
  */
 export const BOOKS = '/api/book/';
 export const OWNED_BOOK = urlsafe(BOOKS, 'owned-books');
-export const BOOKS_AUTHORS = urlsafe(BOOKS, 'authors');
-export const ADD_AUTHOR = urlsafe(BOOKS, 'add-author');
 export const ADD_BOOK = urlsafe(BOOKS, 'add-book');
 export const UPDATE_BOOK = urlsafe(BOOKS, 'update-book');
+export const CHECKOUT_BOOK = urlsafe(BOOKS, 'checkout-book');
+
+export const BOOKS_AUTHORS = urlsafe(BOOKS, 'authors');
+export const ADD_AUTHOR = urlsafe(BOOKS, 'add-author');
+
 export const BOOK_COMMENTS = urlsafe(BOOKS, 'comments');
 export const DELETE_COMMENT = urlsafe(BOOKS, 'delete-comment');
 export const ADD_COMMENT = urlsafe(BOOKS, 'add-comment');
