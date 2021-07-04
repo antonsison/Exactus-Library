@@ -1,1 +1,36 @@
-<p>register works!</p>
+  
+<br>
+<div class="container p-5">
+    <h3 class="section-title mb-3">Register</h3>
+
+    <form [formGroup]="form.form" (ngSubmit)="onSubmit(form.form)">
+        <div>
+            <label>First Name:</label>
+            <input class="form-control" formControlName="first_name" type="text">
+        </div>
+
+        <div>
+            <label>Last Name:</label>
+            <input class="form-control" formControlName="last_name" type="text">
+        </div>
+
+        <div>
+            <label>Email:</label>
+            <input class="form-control" formControlName="email" type="text">
+        </div>
+
+        <div>
+            <label>Password:</label>
+            <input class="form-control" formControlName="password" type="password">
+        </div>
+        <div>
+            <label>Confirm Password:</label>
+            <input class="form-control" formControlName="confirm_password" type="password">
+        </div>
+        <button class="btn btn-primary" type="submit">Register</button>
+    </form>
+
+    <div class="form-group text-center">
+        <a href='#' (click)='redirectLogin($event)'>Back to Home</a>
+    </div>
+</div>
