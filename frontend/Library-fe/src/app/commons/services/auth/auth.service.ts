@@ -3,7 +3,7 @@ import * as _ from 'lodash';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { AUTH_LOGIN, AUTH_USER, AUTH_REGISTER, AUTH_USER_ID } from '../../constants/api.constants';
+import { AUTH_LOGIN, AUTH_USER, AUTH_REGISTER, AUTH_USER_ID,  } from '../../constants/api.constants';
 import { AUTH_KEY } from '../../constants/conf.constants';
 import { User } from '../../models/user.model';
 
@@ -109,6 +109,10 @@ export class AuthService {
         console.log(error);
       }
     );
+  }
+
+  updateUser(user_obj){
+    return this.http.post(AUTH_USER, user_obj)
   }
 
 }

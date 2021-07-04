@@ -30,7 +30,7 @@ export class RegisterComponent implements OnInit {
           this.state.go('login', {'new': true});
         })
         .catch(err => {
-
+          console.log(err)
         })
       ;
     }
