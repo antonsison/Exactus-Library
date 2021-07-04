@@ -6,16 +6,28 @@
         <div>
             <label>First Name:</label>
             <input class="form-control" formControlName="first_name" type="text">
+            <small class="font-red" *ngIf="this.form.form.controls['first_name'].errors 
+                && (this.form.form.controls['first_name'].touched || this.form_submitted)">
+                *required
+            </small>
         </div>
 
         <div>
             <label>Last Name:</label>
             <input class="form-control" formControlName="last_name" type="text">
+            <small class="font-red" *ngIf="this.form.form.controls['last_name'].errors 
+                && (this.form.form.controls['last_name'].touched || this.form_submitted)">
+                *required
+            </small>
         </div>
 
         <div>
             <label>Email:</label>
             <input class="form-control" formControlName="email" type="text">
+            <small class="font-red" *ngIf="this.form.form.controls['email'].errors 
+                && (this.form.form.controls['first_name'].value !== '')">
+                *Invalid email
+            </small>
         </div>
 
         <div class="text-right">

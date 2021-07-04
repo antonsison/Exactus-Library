@@ -10,7 +10,7 @@ export class AuthorForm {
     this.form = new FormBuilder().group({
       first_name    : new FormControl(null, [Validators.required]),
       last_name    : new FormControl(null, [Validators.required]),
-      email    : new FormControl(null, [Validators.required, Validators.email]),
+      email    : new FormControl(null, [Validators.email]),
     });
   }
 }

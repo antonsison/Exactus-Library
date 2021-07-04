@@ -12,6 +12,7 @@ import { BookService } from 'src/app/commons/services/books/book.service';
 export class AddAuthorComponent implements OnInit {
 
   form: AuthorForm;
+  form_submitted: boolean = false;
   constructor(
     private bookService: BookService,
     private state: StateService,
@@ -22,8 +23,9 @@ export class AddAuthorComponent implements OnInit {
   }
 
   onSubmit({ value, valid }: { value: Author, valid: boolean }) {
-
+    this.form_submitted=true;
     if (valid) {
+      this.form_submitted=false;
       this.bookService.addAuthor(value).subscribe(
         (data: Author) => {
           this.state.go('author-list')
