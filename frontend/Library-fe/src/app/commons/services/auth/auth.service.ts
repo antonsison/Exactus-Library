@@ -3,7 +3,7 @@ import * as _ from 'lodash';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { AUTH_LOGIN, AUTH_USER, AUTH_REGISTER, NEW_USER, AUTH_USER_ID } from '../../constants/api.constants';
+import { AUTH_LOGIN, AUTH_USER, AUTH_REGISTER, AUTH_USER_ID } from '../../constants/api.constants';
 import { AUTH_KEY } from '../../constants/conf.constants';
 import { User } from '../../models/user.model';
 
@@ -42,14 +42,6 @@ export class AuthService {
     .then(resp => { return resp; })
     .catch(err => { return Promise.reject(err); });
 
-  }
-
-  /**NEW USER */
-  newUser(creds) {
-    return this.http.post(NEW_USER, creds)
-    .toPromise()
-    .then(resp => { this.setToken(resp); this.authUser(Object(resp).user_id); return resp; })
-    .catch(err => { return Promise.reject(err); });
   }
 
   /* MANAGE USER TOKEN

@@ -7,17 +7,20 @@ class BookAdmin(admin.ModelAdmin):
     model = Book
     readonly_fields = ('date_created', 'date_updated')
     ordering = ('date_created',)
-    list_display = ('title', 'status', 'category', 'get_authors', 'owner', 'date_created', 'date_updated')
+    filter_horizontal = (
+        'author',
+    )
+    list_display = ('title', 'status', 'category', 'owner', 'date_created', 'date_updated')
 
-    def get_authors(self):
-        return ",".join([author for author in self.author.all()])
+    # def get_authors(self):
+    #     return ",".join([author for author in self.author.all()])
 
 
 class AuthorAdmin(admin.ModelAdmin):
 
     model = Author
-    ordering = ('email',)
-    list_display = ('email', 'first_name', 'last_name')
+    ordering = ('id',)
+    list_display = ('id', 'email', 'first_name', 'last_name')
 
 
 class CheckoutAdmin(admin.ModelAdmin):
