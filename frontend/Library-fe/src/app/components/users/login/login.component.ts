@@ -12,6 +12,8 @@ import { Login } from 'src/app/commons/models/login.model';
 export class LoginComponent implements OnInit {
 
   form : LoginForm;
+  form_submitted: boolean = false;
+  backend_error: boolean = false;
 
   constructor(
     private auth: AuthService,
@@ -26,12 +28,15 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit({ value, valid }: { value: Login, valid: boolean }) {
+    this.form_submitted = true;
+    this.backend_error = false;
     if (valid) {
+      this.form_submitted=false
       this.auth.login(value)
         .then(resp => {
           this.state.go('dashboard');
         }).catch(err => {
-        
+          this.backend_error = true;
         })
       ;
     }

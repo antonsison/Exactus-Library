@@ -20,7 +20,9 @@ export class NavigationComponent implements OnInit {
       await this.auth.setuser();
     }
 
-    this.auth.getUser();
+    setTimeout(() => {
+      this.auth.getUser();
+    }, 2000);
   }
 
   dropdownClick(event){
