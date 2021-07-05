@@ -29,7 +29,7 @@ export class BorrowedBooksComponent implements OnInit {
     this.bookService.borrowedBooks().subscribe(
       (data: CheckedOutModel[]) => {
         this.checked_out_book_list = data;
-        console.log(data)
+        this.all_checked_out_book = data;
       }, error => {
         console.log(error);
       }
