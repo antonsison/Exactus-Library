@@ -50,8 +50,11 @@
                     </p>
                 </td>
                 <td class="vertical-align-middle">
-                    <p class="mb-0" [ngClass]="{available: item.book.status==='available'}">
+                    <p class="mb-0" [ngClass]="{available: item.book.status==='available'}" *ngIf="item.returned_date === null">
                         {{ item.book.status }}
+                    </p>
+                    <p class="mb-0" *ngIf="item.returned_date !== null">
+                        Returned
                     </p>
                 </td>
                 <td class="vertical-align-middle">{{ item.book.category }}</td>
