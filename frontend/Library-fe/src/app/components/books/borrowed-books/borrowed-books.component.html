@@ -60,10 +60,10 @@
                     {{ item.returned_date | date:'medium' }}
                 </td>
                 <td class="vertical-align-middle">
-                    <button *ngIf="item.returned_date === null" (click)="returnBook(item.book.id)" class="btn btn-danger">
+                    <button *ngIf="item.returned_date === null" (click)="returnBook(item)" class="btn btn-danger">
                         Return
                     </button>
-                    <p *ngIf="item.returned_date !== null">RETURNED</p>
+                    <p class="mb-0" *ngIf="item.returned_date !== null">RETURNED</p>
                 </td>
             </tr>
         </tbody>

@@ -68,10 +68,11 @@ export class BorrowedBooksComponent implements OnInit {
     )
   }
 
-  returnBook(book_id){
-    this.bookService.returnBook(book_id).subscribe(
+  returnBook(item){
+    this.bookService.returnBook(item.book.id).subscribe(
       data => {
-        console.log(data)
+        item.returned_date = Date.now()
+        item.book.status = 'available'
       }
     )
   }
