@@ -28,10 +28,10 @@
             <input class="form-control" formControlName="email" type="text">
             <div class="font-red" *ngIf="this.form.form.controls['email'].errors
                 && (this.form.form.controls['email'].touched || this.form_submitted)">
-                <span *ngIf="this.form.form.controls['email'].value.trim('') === ''">
+                <span *ngIf="this.form.form.controls['email'].value === '' || this.form.form.controls['email'].value === null">
                     <small class="font-red" *ngIf="this.form.form.controls['email'].errors.required">*required</small>
                 </span>
-                <span *ngIf="this.form.form.controls['email'].value.trim('') !== ''">
+                <span *ngIf="this.form.form.controls['email'].value !== ''">
                     <small class="font-red" *ngIf="this.form.form.controls['email'].errors.email">*invalid email</small>
                 </span>
             </div>
