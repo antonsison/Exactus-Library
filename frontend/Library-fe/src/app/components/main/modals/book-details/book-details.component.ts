@@ -85,4 +85,14 @@ export class BookDetailsComponent extends SimpleModalComponent<BookModel, any> i
     );
   }
 
+  returnBook(){
+    this.bookService.returnBook(this.book.id).subscribe(
+      data => {
+        this.book.returned_date = Date.now()
+        this.book.status = 'available'
+        this.isCheckedOut = false;
+      }
+    )
+  }
+
 }
