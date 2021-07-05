@@ -2,29 +2,56 @@
 <div class="container p-5">
     <h3 class="section-title mb-3">Register</h3>
 
+    <small class="font-red" *ngIf="this.password_match_error && this.form_submitted">Password did not match</small>
+    <small class="font-red" *ngIf="this.backend_error">Invalid email or password</small>
     <form [formGroup]="form.form" (ngSubmit)="onSubmit(form.form)">
         <div>
             <label>First Name:</label>
             <input class="form-control" formControlName="first_name" type="text">
+            <small class="font-red" *ngIf="this.form.form.controls['first_name'].errors 
+                && (this.form.form.controls['first_name'].touched || this.form_submitted)">
+                *required
+            </small>
         </div>
 
         <div>
             <label>Last Name:</label>
             <input class="form-control" formControlName="last_name" type="text">
+            <small class="font-red" *ngIf="this.form.form.controls['last_name'].errors 
+                && (this.form.form.controls['last_name'].touched || this.form_submitted)">
+                *required
+            </small>
         </div>
 
         <div>
             <label>Email:</label>
             <input class="form-control" formControlName="email" type="text">
+            <div class="font-red" *ngIf="this.form.form.controls['email'].errors
+                && (this.form.form.controls['email'].touched || this.form_submitted)">
+                <span *ngIf="this.form.form.controls['email'].value.trim('') === ''">
+                    <small class="font-red" *ngIf="this.form.form.controls['email'].errors.required">*required</small>
+                </span>
+                <span *ngIf="this.form.form.controls['email'].value.trim('') !== ''">
+                    <small class="font-red" *ngIf="this.form.form.controls['email'].errors.email">*invalid email</small>
+                </span>
+            </div>
         </div>
 
         <div>
             <label>Password:</label>
             <input class="form-control" formControlName="password" type="password">
+            <small class="font-red" *ngIf="this.form.form.controls['password'].errors 
+                && (this.form.form.controls['password'].touched || this.form_submitted)">
+                *required
+            </small>
         </div>
         <div>
             <label>Confirm Password:</label>
             <input class="form-control" formControlName="confirm_password" type="password">
+            <small class="font-red" *ngIf="this.form.form.controls['confirm_password'].errors 
+                && (this.form.form.controls['confirm_password'].touched || this.form_submitted)">
+                *required
+            </small>
         </div>
         <div class="text-right">
             <button class="btn btn-secondary mt-3" type="submit">Register</button>

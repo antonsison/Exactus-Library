@@ -12,6 +12,9 @@ import { Register } from 'src/app/commons/models/register.model';
 export class RegisterComponent implements OnInit {
 
   form: RegisterForm;
+  form_submitted:boolean = false;
+  backend_error: boolean = false;
+  password_match_error:boolean = false;
 
   constructor(
     private auth: AuthService,
@@ -24,17 +27,28 @@ export class RegisterComponent implements OnInit {
 
 
   onSubmit({ value, valid }: { value: Register, valid: boolean }) {
+    this.form_submitted=true;
+    this.backend_error=false;
+    this.password_match_error=false;
     if (valid) {
-      this.auth.register(value)
-        .then(resp => {
-          this.state.go('login', {'new': true});
-        })
-        .catch(err => {
-          console.log(err)
-        })
-      ;
+      if(value.password != value.confirm_password){
+        this.password_match_error=true;
+      } else {
+        this.form_submitted=false;
+        this.password_match_error=false;
+        this.auth.register(value)
+          .then(resp => {
+            this.state.go('login', {'new': true});
+          })
+          .catch(err => {
+            this.backend_error=true;
+            console.log(err)
+          })
+        ;
+      }
     }
   }
+
 
   redirectLogin(event) {
     event.preventDefault()
